@@ -3,7 +3,7 @@ import { Plane } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function ChangePasswordWithOTP() {
-  const navigate =useNavigate()
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState('');
   const [formData, setFormData] = useState({
@@ -13,12 +13,10 @@ export default function ChangePasswordWithOTP() {
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-
-    // Verify OTP with backend
     console.log('Verifying OTP:', otp);
     const otpIsValid = true; 
     if (otpIsValid) {
-      setStep(2); 
+      setStep(2);
     } else {
       alert('Invalid OTP. Please try again.');
     }
@@ -27,22 +25,21 @@ export default function ChangePasswordWithOTP() {
   const handleChangePasswordSubmit = (e) => {
     e.preventDefault();
     if (formData.newPassword !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      alert('Passwords do not match!');
       return;
     }
-
     console.log('Changing password:', formData);
     alert('Password updated successfully!');
-    navigate("/login")
+    navigate('/login');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-orange-100">
         {/* Logo & Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-50 rounded-full mb-4 shadow-inner">
-            <Plane className="w-8 h-8 text-emerald-600" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-50 rounded-full mb-4 shadow-inner">
+            <Plane className="w-8 h-8 text-orange-500" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Change Password</h1>
           <p className="text-gray-500">
@@ -52,7 +49,7 @@ export default function ChangePasswordWithOTP() {
           </p>
         </div>
 
-        {/* Step 1: OTP */}
+        {/* Step 1: OTP Verification */}
         {step === 1 && (
           <form onSubmit={handleOtpSubmit} className="space-y-5">
             <div>
@@ -61,21 +58,22 @@ export default function ChangePasswordWithOTP() {
                 id="otp"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
                 placeholder="Enter OTP"
                 required
               />
             </div>
+
             <button
               type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-md hover:shadow-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-md hover:shadow-lg"
             >
               Verify OTP
             </button>
           </form>
         )}
 
-        {/* Step 2: New Password */}
+        {/* Step 2: Set New Password */}
         {step === 2 && (
           <form onSubmit={handleChangePasswordSubmit} className="space-y-5">
             <div>
@@ -84,9 +82,11 @@ export default function ChangePasswordWithOTP() {
                 id="newPassword"
                 name="newPassword"
                 value={formData.newPassword}
-                onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-                placeholder="enter new password"
+                onChange={(e) =>
+                  setFormData({ ...formData, newPassword: e.target.value })
+                }
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
+                placeholder="Enter new password"
                 required
               />
             </div>
@@ -97,16 +97,21 @@ export default function ChangePasswordWithOTP() {
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
-                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-                placeholder="confirm your password"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    confirmPassword: e.target.value
+                  })
+                }
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
+                placeholder="Confirm your password"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-md hover:shadow-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-md hover:shadow-lg"
             >
               Update Password
             </button>
